@@ -1,26 +1,54 @@
 // File: src/WebviewProvider.js
 const vscode = require('vscode');
 
+
 class WebviewProvider {
     constructor(context) {
         this.context = context;
+        this.panel = null;
+        this.cssUri = null;
+        this.jsUri = null;
+        
+        console.log("Created view")
     }
 
-    createWebviewPanel(content, title) {
-        const panel = vscode.window.createWebviewPanel(
-            'flowChartPreview',
-            title,
-            vscode.ViewColumn.One,
-            { enableScripts: true, localResourceRoots: [this.context.extensionUri] }
-        );
-
+    updateMediaPath(){
         const cssPath = vscode.Uri.joinPath(this.context.extensionUri, 'media', 'bundle.css');
         const jsPath = vscode.Uri.joinPath(this.context.extensionUri, 'media', 'text2chart.min.js');
-    
-        const cssUri = panel.webview.asWebviewUri(cssPath);
-        const jsUri = panel.webview.asWebviewUri(jsPath);
+        this.cssUri = this.panel.webview.asWebviewUri(cssPath);
+        this.jsUri = this.panel.webview.asWebviewUri(jsPath);
+    }
 
-        panel.webview.html = this.getWebviewContent(content, jsUri, cssUri);
+    createWebviewPanel(content, title, filePath) {
+        if(this.panel){
+            this.panel.reveal(vscode.ViewColumn.One);
+        }else{
+            this.panel = vscode.window.createWebviewPanel(
+                'flowChartPreview',
+                title,
+                vscode.ViewColumn.One,
+                { enableScripts: true, localResourceRoots: [this.context.extensionUri] }
+            );
+
+            this.updateMediaPath();
+
+            this.listenForContentChanges(filePath, this.jsUri, this.cssUri)
+            this.panel.webview.html = this.getWebviewContent(content, this.jsUri, this.cssUri);
+
+            this.panel.onDidDispose(() => {
+                this.panel = null;
+            });
+        }
+    }
+
+    listenForContentChanges(filePath, jsUri, cssUri){
+        vscode.workspace.onDidChangeTextDocument(event => {
+            if (event.document.uri.path === filePath) {
+                // Update the Webview with the latest content
+                const updatedContent = event.document.getText();
+                this.panel.webview.html = this.getWebviewContent(updatedContent, jsUri, cssUri);
+            }
+        });
     }
 
     getWebviewContent(content, jsUri, cssUri) {
