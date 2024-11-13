@@ -1,0 +1,18 @@
+{
+  "scopeName": "source.stflow",
+  "patterns": [
+      {
+          "name": "keyword.control.flow.stflow",
+          "match": "^(\\s*)(FLOW|LOOP|IF|THEN|ELSE|END|ERR|FOLLOW)"
+      },
+      {
+          "name": "entity.name.function.flowline.stflow",
+          "match": "^\\s*FLOW:\\s.*$"
+      },
+      {
+          "name": "comment.line.stflow",
+          "match": "\\s*#.*$"
+      }
+  ],
+  "repository": {}
+}

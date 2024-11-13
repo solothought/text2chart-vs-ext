@@ -1,0 +1,63 @@
+{
+  "name": "text2chart",
+  "displayName": "Text2Chart",
+  "description": "Generate diagrams from simple text",
+  "version": "0.0.1",
+  "repository": "https://github.com/solothought/text2chart-vs-ext",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "text2chart.previewFlowChart",
+        "title": "Preview SoloThought Flow Chart"
+      }
+    ],
+    "languages": [
+      {
+        "id": "stflow",
+        "aliases": ["SoloThought Flow File"],
+        "extensions": [".stflow"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "stflow",
+        "scopeName": "source.stflow",
+        "path": "./syntaxes/stflow.tmLanguage.json"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "stflowPreview",
+          "name": "SloThought Flow Chart Preview"
+        }
+      ]
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "text2chart.previewFlowChart",
+          "when": "resourceLangId == stflow",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
