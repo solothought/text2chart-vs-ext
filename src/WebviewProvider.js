@@ -8,8 +8,6 @@ class WebviewProvider {
         this.panel = null;
         this.cssUri = null;
         this.jsUri = null;
-        
-        console.log("Created view")
     }
 
     updateMediaPath(){

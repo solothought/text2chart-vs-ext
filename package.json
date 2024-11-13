@@ -1,14 +1,24 @@
 {
   "name": "text2chart",
   "displayName": "Text2Chart",
-  "description": "Generate diagrams from simple text",
-  "version": "0.0.1",
+  "publisher": "SoloThought",
+  "description": "Generate diagrams like FlowChart from simple text",
+  "version": "1.0.0",
+  "icon": "media/Text2Chart_logo.png",
   "repository": "https://github.com/solothought/text2chart-vs-ext",
+  "author": "Amit Gupta (https://solothought.com)",
+  "license": "MIT",
+  "funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/solothought/"
+		}
+  ],
   "engines": {
     "vscode": "^1.95.0"
   },
   "categories": [
-    "Other"
+    "Visualization"
   ],
   "activationEvents": [],
   "main": "./extension.js",
@@ -16,13 +26,13 @@
     "commands": [
       {
         "command": "text2chart.previewFlowChart",
-        "title": "Preview SoloThought Flow Chart"
+        "title": "Preview Text2Chart Flow"
       }
     ],
     "languages": [
       {
         "id": "stflow",
-        "aliases": ["SoloThought Flow File"],
+        "aliases": ["Text2Chart Flow"],
         "extensions": [".stflow"],
         "configuration": "./language-configuration.json"
       }
@@ -38,7 +48,7 @@
       "explorer": [
         {
           "id": "stflowPreview",
-          "name": "SloThought Flow Chart Preview"
+          "name": "Text2Chart Flow Preview"
         }
       ]
     },
@@ -53,7 +63,8 @@
     }
   },
   "scripts": {
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "build":"vsce package"
   },
   "devDependencies": {
     "@types/vscode": "^1.95.0",
