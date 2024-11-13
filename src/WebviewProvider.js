@@ -35,7 +35,7 @@ class WebviewProvider {
                 <link rel="stylesheet" href="${cssUri}">
             </head>
             <body>
-                <div id="app" style="width:100vw; height:100vh;" ></div>
+                <div id="app" ></div>
                 
                 <!-- Load Text2Chart library -->
                 <script src="${jsUri}"></script>
@@ -45,7 +45,8 @@ class WebviewProvider {
                         new Text2Chart.FlowChart({
                             target: document.getElementById("app"),
                             props: {
-                                text: ${serializedContent}
+                                text: ${serializedContent},
+                                style: "width: 100vw; height: 100vh;"
                             }
                         });
                     });

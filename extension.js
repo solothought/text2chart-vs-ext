@@ -7,7 +7,7 @@ function activate(context) {
     const disposable = vscode.commands.registerCommand('text2chart.previewFlowChart', async (uri) => {
         let content = "", title = 'Flow Chart: ';
 
-        console.log('Command triggered with URI:', uri);
+        // console.log('Command triggered with URI:', uri);
         if (uri && uri.path.endsWith('.stflow')) { // When command is selected from context menu
             vscode.window.showInformationMessage(uri);
             const document = await vscode.workspace.openTextDocument(uri);
