@@ -72,7 +72,9 @@ class WebviewProvider {
                             target: document.getElementById("app"),
                             props: {
                                 text: ${serializedContent},
-                                style: "width: 100vw; height: 100vh;"
+                                width: "100vw",
+                                height: "100vh"
+                                // style: "width: 100vw; height: 100vh;"
                             }
                         });
                     });

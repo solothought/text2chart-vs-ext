@@ -13,6 +13,8 @@ Text2Chart is a JavaScript library that creates interactive diagrams from simple
 - Hide/Show step detail in the chart
 - Save chart as image
 - Highlight reserved keywords
+- Algorithm observations
+- Expand/Collapse brnach nodes
 
 ## Usage
 
